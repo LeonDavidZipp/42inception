@@ -1,4 +1,4 @@
-FROM bitnami/minideb:bullseye
+FROM debian:stable-slim
 
 RUN apt-get update -y \
     && apt-get install -y mariadb-server
