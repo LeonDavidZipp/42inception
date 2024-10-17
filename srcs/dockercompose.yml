@@ -1,7 +1,0 @@
-services:
-  wordpress:
-    image: dockerfiles/dockerfile.wp
-  db:
-    image: dockerfiles/dockerfile.db
-  nginx:
-    image: dockerfiles/dockerfile.nginx
