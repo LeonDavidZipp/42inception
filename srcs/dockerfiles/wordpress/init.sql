@@ -1,0 +1,12 @@
+CREATE USER app_user WITH PASSWORD '70hHf01ghiuinaZgP';
+DROP DATABASE IF EXISTS app_db;
+CREATE DATABASE app_db;
+\c app_db
+GRANT ALL ON SCHEMA public TO app_user;
+
+CREATE USER user_user WITH PASSWORD '70789nJUf01jK0F6inshP';
+DROP DATABASE IF EXISTS user_db;
+CREATE DATABASE user_db;
+GRANT ALL PRIVILEGES ON DATABASE user_db TO user_user;
+\c user_db
+GRANT ALL ON SCHEMA public TO user_user;
