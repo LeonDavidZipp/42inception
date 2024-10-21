@@ -11,28 +11,28 @@ services:
         container_name: nginx
         build: ./dockerfiles/nginx/.
         ports:
-            - "443:443"
-        depends_on:
-            - wordpress
+            - "80:80"
+        # depends_on:
+        #     - wordpress
         volumes:
             - wordpress:/var/www/html
-        networks:
-            - inception
+        # networks:
+        #     - inception
         env_file:
             - .env
         restart: always
-    wordpress:
-        container_name: wordpress
-        build: ./dockerfiles/wordpress/.
-        depends_on:
-            - mariadb
-        volumes:
-            - wordpress:/var/www/html
-        env_file:
-            - .env
-        networks:
-            - inception
-        restart: always
+    # wordpress:
+    #     container_name: wordpress
+    #     build: ./dockerfiles/wordpress/.
+    #     depends_on:
+    #         - mariadb
+    #     volumes:
+    #         - wordpress:/var/www/html
+    #     env_file:
+    #         - .env
+    #     networks:
+    #         - inception
+    #     restart: always
     mariadb:
         container_name: mariadb
         build: ./dockerfiles/mariadb/.
