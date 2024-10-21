@@ -7,20 +7,20 @@ networks:
         name: inception
 
 services:
-    # nginx:
-    #     container_name: nginx
-    #     build: ./dockerfiles/nginx/.
-    #     ports:
-    #         - "443:443"
-    #     depends_on:
-    #         - wordpress
-    #     volumes:
-    #         - wordpress:/var/www/html
-    #     networks:
-    #         - inception
-    #     env_file:
-    #         - .env
-    #     restart: always
+    nginx:
+        container_name: nginx
+        build: ./dockerfiles/nginx/.
+        ports:
+            - "80:80"
+        # depends_on:
+        #     - wordpress
+        volumes:
+            - wordpress:/var/www/html
+        # networks:
+        #     - inception
+        env_file:
+            - .env
+        restart: always
     # wordpress:
     #     container_name: wordpress
     #     build: ./dockerfiles/wordpress/.
