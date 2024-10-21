@@ -1,6 +1,6 @@
 FROM debian:stable-slim
 
-COPY ./nginx.conf /etc/nginx/conf.d
+COPY ./ /etc/nginx/conf.d
 
 RUN apt-get update \
     && apt-get upgrade \
