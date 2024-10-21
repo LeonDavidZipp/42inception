@@ -1,6 +1,6 @@
 FROM debian:stable-slim
 
-COPY ./ /etc/nginx/conf.d
+COPY ./default /etc/nginx/sites-available/.
 
 RUN apt-get update \
     && apt-get upgrade \
