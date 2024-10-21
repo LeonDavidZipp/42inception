@@ -1,10 +1,5 @@
-CREATE USER 'app_user'@'%' IDENTIFIED BY '70hHf01ghiuinaZgP';
-DROP DATABASE IF EXISTS app_db;
-CREATE DATABASE app_db;
-GRANT ALL PRIVILEGES ON app_db.* TO 'app_user'@'%';
-
-CREATE USER 'user_user'@'%' IDENTIFIED BY '70789nJUf01jK0F6inshP';
-DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE user_db;
-GRANT ALL PRIVILEGES ON user_db.* TO 'user_user'@'%';
+CREATE USER 'wordpress_user'@'%' IDENTIFIED BY '70789nJUf01jK0F6inshP';
+DROP DATABASE IF EXISTS wordpress_db;
+CREATE DATABASE wordpress_db;
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wordpress_user'@'%';
 FLUSH PRIVILEGES;

@@ -1,10 +1,12 @@
 FROM debian:stable-slim
 
-COPY init.sql /
-COPY entrypoint.sh /
+COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/.
+COPY ./init.sql /etc/mysql.init.sql
 
-RUN apt-get update -y \
-    && apt-get install -y mariadb-server \
-    && chmod +x /entrypoint.sh
+RUN apt-get update \
+    && apt-get upgrade \
+    && apt-get install -y \
+        mariadb-server \
+    && mkdir /run/mysqld
 
-CMD ["/entrypoint.sh"]
+CMD ["mysqld"]
