@@ -1,5 +1,5 @@
 volumes:
-    wordpress:
+    # wordpress:
     mariadb:
 
 networks:
@@ -15,7 +15,7 @@ services:
         # depends_on:
         #     - wordpress
         volumes:
-            - wordpress:/var/www/html
+            - ./web:/var/www/html
         # networks:
         #     - inception
         env_file:
