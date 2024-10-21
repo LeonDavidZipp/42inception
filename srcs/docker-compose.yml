@@ -21,18 +21,18 @@ services:
         env_file:
             - .env
         restart: always
-    # wordpress:
-    #     container_name: wordpress
-    #     build: ./dockerfiles/wordpress/.
-    #     depends_on:
-    #         - mariadb
-    #     volumes:
-    #         - wordpress:/var/www/html
-    #     env_file:
-    #         - .env
-    #     networks:
-    #         - inception
-    #     restart: always
+    wordpress:
+        container_name: wordpress
+        build: ./dockerfiles/wordpress/.
+        # depends_on:
+        #     - mariadb
+        volumes:
+            - wordpress:/var/www/html
+        env_file:
+            - .env
+        # networks:
+        #     - inception
+        restart: always
     mariadb:
         container_name: mariadb
         build: ./dockerfiles/mariadb/.
