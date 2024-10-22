@@ -1,7 +1,5 @@
 FROM debian:stable-slim
 
-COPY ./default /etc/nginx/sites-available/.
-
 RUN apt-get update \
     && apt-get upgrade \
     && apt-get install -y \
@@ -12,5 +10,7 @@ RUN apt-get update \
 #         -out /etc/nginx/ssl/lzipp.crt \
 #         -keyout /etc/nginx/ssl/lzipp.key \
 # && mkdir -p /run/nginx
+
+COPY ./default /etc/nginx/sites-available/.
 
 CMD ["nginx", "-g", "daemon off;"]
