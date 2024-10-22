@@ -1,11 +1,13 @@
 FROM debian:stable-slim
 
-COPY ./www.conf /etc/php/8.2/fpm/pool.d/.
-
 RUN apt-get update \
     && apt-get upgrade \
     && apt-get install -y \
-        php-fpm \
-        php-mysql
+    php-fpm \
+    php-mysqli \
+    curl
 
-CMD ["php-fpm8.2", "-F"]
+COPY ./www.conf /etc/php/8.2/fpm/pool.d/.
+COPY ./script.sh .
+
+CMD ["./script.sh"]
