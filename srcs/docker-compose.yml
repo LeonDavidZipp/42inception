@@ -18,8 +18,8 @@ services:
             - ./web:/var/www/html
         networks:
             - inception
-        env_file:
-            - .env
+        # env_file:
+        #     - .env
         restart: always
     wordpress:
         container_name: wordpress
@@ -28,10 +28,10 @@ services:
             - mariadb
         volumes:
             - ./web:/var/www/html
-        env_file:
-            - .env
         networks:
             - inception
+        # env_file:
+        #     - .env
         restart: always
     mariadb:
         container_name: mariadb
