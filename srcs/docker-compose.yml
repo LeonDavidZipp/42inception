@@ -1,6 +1,17 @@
-volumes:
-    # wordpress:
-    mariadb:
+# for on vm
+# volumes:
+#     mariadb:
+#         driver: local
+#         driver_opts:
+#             type: none
+#             device: /home/lzipp/data/mariadb
+#             o: bind
+#     wordpress:
+#         driver: local
+#         driver_opts:
+#             type: none
+#             device: /home/lzipp/data/wordpress
+#             o: bind
 
 networks:
     inception:
