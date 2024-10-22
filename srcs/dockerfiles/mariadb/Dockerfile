@@ -7,6 +7,6 @@ RUN apt-get update \
     && mkdir /run/mysqld
 
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/.
-COPY ./init.sql /etc/mysql.init.sql
+COPY ./init.sql /etc/mysql/init.sql
 
 CMD ["mysqld"]
