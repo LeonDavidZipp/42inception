@@ -1,2 +1,2 @@
 all:
-	docker-compose up
+	cd srcs && docker compose up --build --remove-orphans
