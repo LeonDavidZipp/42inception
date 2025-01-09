@@ -19,13 +19,20 @@
 # Default server configuration
 #
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	# listen 80 default_server;
+	# listen [::]:80 default_server;
 
 	# SSL configuration
 	#
-	# listen 443 ssl default_server;
-	# listen [::]:443 ssl default_server;
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	ssl_certificate		/etc/nginx/ssl/lzipp.crt;
+	ssl_certificate_key	/etc/nginx/ssl/lzipp.key;
+
+	ssl_protocols		TLSv1.3;
+	# ssl_prefer_server_ciphers on;
+
 	#
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332
@@ -43,13 +50,13 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name _;
+	server_name lzipp.42.fr;
 
-	location / {
+	# location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
+		# try_files $uri $uri/ =404;
+	# }
 
 	# pass PHP scripts to FastCGI server
 	#
@@ -59,7 +66,10 @@ server {
 		# With php-fpm (or other unix sockets):
 		# fastcgi_pass unix:/run/php/php7.4-fpm.sock;
 		# With php-cgi (or other tcp sockets):
+        try_files $uri $uri/ =404;
 		fastcgi_pass wordpress:9000;
+        include fastcgi_params;
+
 	}
 
 	# deny access to .htaccess files, if Apache's document root
