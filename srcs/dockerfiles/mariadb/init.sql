@@ -1,5 +1,5 @@
-CREATE USER 'wordpress_user'@'%' IDENTIFIED BY '70789nJUf01jK0F6inshP';
-DROP DATABASE IF EXISTS wordpress_db;
-CREATE DATABASE wordpress_db;
-GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wordpress_user'@'%';
+CREATE USER 'db_wp_user'@'%' IDENTIFIED BY 'db_wp_pw';
+DROP DATABASE IF EXISTS db_wp_name;
+CREATE DATABASE db_wp_name;
+GRANT ALL PRIVILEGES ON db_wp_name.* TO 'db_wp_user'@'%';
 FLUSH PRIVILEGES;
