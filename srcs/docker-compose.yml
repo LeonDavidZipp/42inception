@@ -8,48 +8,77 @@ networks:
     inception:
         name: inception
 
+secrets:
+    db_wp_name:
+        file: secrets/db_wp_name.txt
+    db_wp_pwd:
+        file: secrets/db_wp_pwd.txt
+    db_wp_user:
+        file: secrets/db_wp_user.txt
+
 services:
-    nginx:
-        container_name: nginx
-        build: ./dockerfiles/nginx/.
-        ports:
-            - "443:443"
-            # - "80:80" # explicitly not used
-        depends_on:
-            - wordpress
-        volumes:
-            - ./web:/var/www/html
-        networks:
-            - inception
-        # env_file:
-        #     - .env
-        restart: always
-    wordpress:
-        container_name: wordpress
-        build: ./dockerfiles/wordpress/.
-        depends_on:
-            - mariadb
-        volumes:
-            - ./web:/var/www/html
-        networks:
-            - inception
-        secrets:
-            - wp_admin
-            - wp_admin_email
-            - wp_admin_pwd
-            - wp_email
-            - wp_pwd
-            - wp_title
-            - wp_user
-        restart: always
+#    nginx:
+#        container_name: nginx
+#        build: ./dockerfiles/nginx/.
+#        ports:
+#            - "443:443"
+#            # - "80:80" # explicitly not used
+#        depends_on:
+#            - wordpress
+#        volumes:
+#            - ./web:/var/www/html
+#        networks:
+#            - inception
+#        restart: always
+#    wordpress:
+#        container_name: wordpress
+#        build: ./dockerfiles/wordpress/.
+#        ports:
+#            - "9000:9000"
+#        depends_on:
+#            - mariadb
+#        volumes:
+#            - ./web:/var/www/html
+#        networks:
+#            - inception
+#        secrets:
+#            - wp_admin
+#            - wp_admin_email
+#            - wp_admin_pwd
+#            - wp_email
+#            - wp_pwd
+#            - wp_title
+#            - wp_user
+#        restart: always
     mariadb:
         container_name: mariadb
         build: ./dockerfiles/mariadb/.
+        ports:
+            - "3306:3306"
         volumes:
-            - mariadb:/var/lib/mysql
-            - /home/lzipp/data/mariadb:/var/lib/mysql
-        env_file:
-            - .env
+#            - mariadb:/var/lib/mysql
+#            - /home/lzipp/data/mariadb:/var/lib/mysql
+            - /var/lib/mysql
+        secrets:
+            - db_wp_user
+            - db_wp_pwd
+            - db_wp_name
         networks:
             - inception
         restart: always
+
+#    init_mariadb:
+#        container_name: init_mariadb
+#        build: ./dockerfiles/mariadb/.
+#        ports:
+#            - "3307:3307"
+#        volumes:
+#            - mariadb:/var/lib/mysql
+#            - /home/lzipp/data/mariadb:/var/lib/mysql
+#        secrets:
+#            - db_wp_user
+#            - db_wp_pwd
+#            - db_wp_name
+#        networks:
+#            - inception
+#        restart: always
