@@ -1,6 +1,8 @@
 volumes:
-    # wordpress:
-    mariadb:
+    wordpress_database:
+        driver: local
+    wordpress_website_files:
+        driver: local
 
 networks:
     inception:
@@ -31,14 +33,21 @@ services:
             - ./web:/var/www/html
         networks:
             - inception
-        # env_file:
-        #     - .env
+        secrets:
+            - wp_admin
+            - wp_admin_email
+            - wp_admin_pwd
+            - wp_email
+            - wp_pwd
+            - wp_title
+            - wp_user
         restart: always
     mariadb:
         container_name: mariadb
         build: ./dockerfiles/mariadb/.
         volumes:
             - mariadb:/var/lib/mysql
+            - /home/lzipp/data/mariadb:/var/lib/mysql
         env_file:
             - .env
         networks:
