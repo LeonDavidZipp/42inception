@@ -54,7 +54,7 @@ services:
         container_name: mariadb
         build:
             context: srcs/dockerfiles/mariadb
-            target: prod
+            target: base
         ports:
             - "3306:3306"
         volumes:
@@ -71,18 +71,3 @@ services:
         restart: unless-stopped
         user:
             mysql
-
-    init_mariadb:
-        container_name: init_mariadb
-        build:
-            context: srcs/dockerfiles/mariadb
-            target: init
-        depends_on:
-            - mariadb
-        ports:
-            - "3307:3307"
-        volumes:
-            - ./srcs/dockerfiles/mariadb:/app
-        networks:
-            - inception
-        restart: unless-stopped
