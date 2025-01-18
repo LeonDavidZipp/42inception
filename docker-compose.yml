@@ -12,7 +12,7 @@ secrets:
     db_wp_name:
         file: secrets/db_wp_name.txt
     db_wp_pwd:
-        file: secrets/db_wp_pwd.txt
+        file: srcs/secrets/db_wp_pwd.txt
     db_wp_user:
         file: secrets/db_wp_user.txt
 
@@ -52,7 +52,9 @@ services:
 #        restart: always
     mariadb:
         container_name: mariadb
-        build: ./dockerfiles/mariadb/.
+        build:
+            context: srcs/dockerfiles/mariadb
+            target: prod
         ports:
             - "3306:3306"
         volumes:
@@ -60,25 +62,27 @@ services:
 #            - /home/lzipp/data/mariadb:/var/lib/mysql
             - /var/lib/mysql
         secrets:
-            - db_wp_user
             - db_wp_pwd
-            - db_wp_name
+        environment:
+            - DB_WP_USER=${DB_WP_USER}
+            - DB_WP_NAME=${DB_WP_NAME}
         networks:
             - inception
-        restart: always
+        restart: unless-stopped
+        user:
+            mysql
 
-#    init_mariadb:
-#        container_name: init_mariadb
-#        build: ./dockerfiles/mariadb/.
-#        ports:
-#            - "3307:3307"
-#        volumes:
-#            - mariadb:/var/lib/mysql
-#            - /home/lzipp/data/mariadb:/var/lib/mysql
-#        secrets:
-#            - db_wp_user
-#            - db_wp_pwd
-#            - db_wp_name
-#        networks:
-#            - inception
-#        restart: always
+    init_mariadb:
+        container_name: init_mariadb
+        build:
+            context: srcs/dockerfiles/mariadb
+            target: init
+        depends_on:
+            - mariadb
+        ports:
+            - "3307:3307"
+        volumes:
+            - ./srcs/dockerfiles/mariadb:/app
+        networks:
+            - inception
+        restart: unless-stopped
