@@ -5,7 +5,7 @@
 # this is read by the standalone daemon and embedded servers
 [server]
 
-init_file = /etc/mysql/init.tmp.sql
+# init_file = /etc/mysql/init.tmp.sql
 
 # this is only for the mysqld standalone daemon
 [mysqld]
@@ -14,7 +14,7 @@ init_file = /etc/mysql/init.tmp.sql
 # * Basic Settings
 #
 
-user                    = root
+user                    = mysql
 pid-file                = /run/mysqld/mysqld.pid
 basedir                 = /usr
 datadir                 = /var/lib/mysql
@@ -26,7 +26,7 @@ tmpdir                  = /tmp
 
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
-bind-address            = mariadb
+bind-address            = 0.0.0.0
 
 #
 # * Fine Tuning
