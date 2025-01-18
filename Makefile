@@ -1,7 +1,7 @@
 CERTDIR := srcs/dockerfiles/nginx/certs
 SECRETSDIR := srcs/secrets
 
-all: clean_secrets secrets
+all:
 	docker-compose up
 
 init_db:
