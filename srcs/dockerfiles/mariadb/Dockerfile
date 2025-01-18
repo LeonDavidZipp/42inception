@@ -3,23 +3,29 @@
 # ----------------------------------------------- #
 FROM debian:stable-slim as base
 
+MAINTAINER "lzipp"
+WORKDIR /app
+
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/.
-COPY ./init.sql /etc/mysql.init.sql
 
 RUN apt-get update \
 	&& apt-get upgrade \
 	&& apt-get install -y \
 	    mariadb-server \
-	    sed \
-	&& mkdir /run/mysqld
-RUN sed \
-	-e "s/db_wp_user/$(cat /run/secrets/db_wp_user)/g" \
-	-e "s/db_wp_pwd/$(cat /run/secrets/db_wp_pwd)/g" \
-	-e "s/db_wp_name/$(cat /run/secrets/db_wp_name)/g" \
-	/etc/mysql.init.sql > /etc/mysql.init.tmp.sql
-
-CMD ["mysqld"]
+	&& mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 # ----------------------------------------------- #
 # Image for the MariaDB container                 #
 # ----------------------------------------------- #
+FROM base as prod
+
+WORKDIR /app
+
+CMD ["mysqld"]
+
+# ----------------------------------------------- #
+# Image for the MariaDB init container            #
+# ----------------------------------------------- #
+FROM base as init
+
+WORKDIR /app
