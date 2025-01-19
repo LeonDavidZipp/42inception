@@ -50,8 +50,8 @@ services:
 #            - wp_title
 #            - wp_user
 #        restart: always
-    mariadb:
-        container_name: mariadb
+    db:
+        container_name: db
         build:
             context: srcs/dockerfiles/mariadb
             target: base

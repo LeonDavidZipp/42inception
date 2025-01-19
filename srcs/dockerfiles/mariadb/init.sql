@@ -3,5 +3,5 @@ DROP DATABASE IF EXISTS db_wp_name;
 CREATE DATABASE db_wp_name;
 GRANT ALL PRIVILEGES ON db_wp_name.* TO 'db_wp_user'@'%';
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'db_root_pw';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'db_root_pwd';
 FLUSH PRIVILEGES;
