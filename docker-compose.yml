@@ -63,6 +63,7 @@ services:
             - /var/lib/mysql
         secrets:
             - db_wp_pwd
+            - db_root_pwd
         environment:
             - DB_WP_USER=${DB_WP_USER}
             - DB_WP_NAME=${DB_WP_NAME}
